@@ -1,36 +1,39 @@
 <!-- =========================================================
- Black Velvet - GLOBAL HEAD (GH Pages listo)
- - Base: meta[name="site-base"] => "/blackv/"
- - Absolutiza OG + favicons + assets con URL() segura
- - Tema temprano para evitar flash
+ Black Velvet — GLOBAL HEAD (Pagespeed + GH Pages)
+ - Repo base: /blackv/
+ - Tema temprano sin FOUC
+ - Absolutiza assets con URL() segura
+ - CSS único: main.css
+ - JS diferido: app.js
 ========================================================= -->
 <head>
   <meta charset="utf-8" />
-
-  <!-- Base GH Pages (repo blackv) -->
   <meta name="site-base" content="/blackv/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Theme early (evita flash) -->
+  <title>Black Velvet | Lencería y juguetes</title>
+  <meta
+    name="description"
+    content="Black Velvet: tienda online de lencería, juguetes y accesorios con envío discreto en CDMX, Edomex y envíos nacionales."
+  />
+  <meta name="robots" content="index,follow" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- Theme early -->
   <script>
   (function () {
     try {
       var KEY = "blackvelvet_theme";
       var saved = localStorage.getItem(KEY);
-      var theme = (saved === "light" || saved === "dark") ? saved : "dark";
-      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.theme =
+        saved === "light" || saved === "dark" ? saved : "dark";
     } catch (e) {
       document.documentElement.dataset.theme = "dark";
     }
   })();
   </script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="index, follow" />
-
-  <title>Black Velvet | Lencería y juguetes</title>
-  <meta name="description" content="Black Velvet: tienda online de lencería, juguetes y accesorios con envío discreto en CDMX, Edomex y envíos nacionales." />
-
-  <!-- Theme color -->
+  <!-- Theme colors -->
   <meta name="theme-color" content="#0b0b0f" />
   <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -40,23 +43,26 @@
   <meta property="og:site_name" content="Black Velvet" />
   <meta property="og:locale" content="es_MX" />
   <meta property="og:title" content="Black Velvet | Lencería y juguetes" />
-  <meta property="og:description" content="Compra lencería, juguetes y accesorios con diseño premium, envío discreto y atención por WhatsApp." />
+  <meta
+    property="og:description"
+    content="Compra lencería, juguetes y accesorios con diseño premium, envío discreto y atención por WhatsApp."
+  />
   <meta property="og:image" class="js-abs-meta" data-path="IMG/og-blackvelvet.webp" content="" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts -->
+  <!-- Fonts: una sola familia, con preconnect correcto -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+  />
 
   <!-- CSS principal -->
   <link rel="stylesheet" class="js-abs" data-href="main.css" />
 
   <!-- JS principal -->
   <script class="js-abs" data-src="app.js" defer></script>
-
-  <!-- Preload LCP solo si aplica en esta página -->
-  <!-- <link rel="preload" as="image" class="js-abs" data-href="IMG/hero-home.webp" fetchpriority="high" /> -->
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" class="js-abs" data-href="IMG/apple-touch-icon.png" />
@@ -65,19 +71,19 @@
   <link rel="manifest" class="js-abs" data-href="IMG/site.webmanifest" />
   <link rel="icon" class="js-abs" data-href="IMG/favicon.ico" />
 
-  <!-- Absolutiza OG + links + scripts -->
+  <!-- Absolutiza links, scripts y OG -->
   <script>
   (function () {
     try {
       var meta = document.querySelector('meta[name="site-base"]');
-      var root = (meta && meta.content) ? meta.content.trim() : "/";
+      var root = meta && meta.content ? meta.content.trim() : "/";
 
       if (!root.startsWith("/")) root = "/" + root;
-      if (!root.endsWith("/")) root = root + "/";
+      if (!root.endsWith("/")) root += "/";
 
       var baseAbs = new URL(
         root,
-        (location.origin && location.origin !== "null") ? location.origin : location.href
+        location.origin && location.origin !== "null" ? location.origin : location.href
       ).toString();
 
       function abs(p) {
@@ -85,15 +91,15 @@
         return new URL(p, baseAbs).toString();
       }
 
-      document.querySelectorAll('link.js-abs[data-href]').forEach(function (el) {
+      document.querySelectorAll("link.js-abs[data-href]").forEach(function (el) {
         el.href = abs(el.getAttribute("data-href"));
       });
 
-      document.querySelectorAll('script.js-abs[data-src]').forEach(function (el) {
+      document.querySelectorAll("script.js-abs[data-src]").forEach(function (el) {
         el.src = abs(el.getAttribute("data-src"));
       });
 
-      document.querySelectorAll('meta.js-abs-meta[data-path]').forEach(function (el) {
+      document.querySelectorAll("meta.js-abs-meta[data-path]").forEach(function (el) {
         el.setAttribute("content", abs(el.getAttribute("data-path")));
       });
     } catch (e) {}
