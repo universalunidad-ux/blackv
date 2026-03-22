@@ -1,106 +1,52 @@
-<!-- =========================================================
- Black Velvet — GLOBAL HEAD (flexible + GH Pages + Pagespeed)
- - Base genérica para cualquier página
- - No depende de páginas enlistadas
- - Usa metas por defecto si la página no define otras
- - Absolutiza assets con URL() segura
-========================================================= -->
 <head>
   <meta charset="utf-8" />
   <meta name="site-base" content="/blackv/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO base por defecto -->
+  <!-- SEO -->
   <title>Black Velvet</title>
-  <meta
-    name="description"
-    content="Black Velvet: tienda online con lencería, juguetes y accesorios, envío discreto y atención por WhatsApp."
-  />
+  <meta name="description" content="Black Velvet: lencería, juguetes y accesorios con envío discreto y atención por WhatsApp." />
   <meta name="robots" content="index,follow" />
   <meta name="color-scheme" content="dark light" />
 
   <!-- Theme early -->
   <script>
-  (function () {
-    try {
-      var KEY = "blackvelvet_theme";
-      var saved = localStorage.getItem(KEY);
-      document.documentElement.dataset.theme =
-        saved === "light" || saved === "dark" ? saved : "dark";
-    } catch (e) {
-      document.documentElement.dataset.theme = "dark";
-    }
+  (function(){
+    try{
+      var t=localStorage.getItem("blackvelvet_theme");
+      document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:"dark";
+    }catch(e){document.documentElement.dataset.theme="dark";}
   })();
   </script>
 
   <!-- Theme colors -->
   <meta name="theme-color" content="#0b0b0f" />
-  <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 
-  <!-- Open Graph base -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Black Velvet" />
-  <meta property="og:locale" content="es_MX" />
   <meta property="og:title" content="Black Velvet" />
-  <meta
-    property="og:description"
-    content="Lencería, juguetes y accesorios con envío discreto y atención por WhatsApp."
-  />
-  <meta property="og:image" class="js-abs-meta" data-path="IMG/og-blackvelvet.webp" content="" />
+  <meta property="og:description" content="Lencería y juguetes con envío discreto." />
+  <meta property="og:image" content="/blackv/IMG/og-blackvelvet.webp" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 
-  <!-- CSS principal -->
-<link rel="stylesheet" href="/blackv/main.css">
-  <!-- JS principal -->
-<script src="/blackv/app.js" defer></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blackv/main.css">
+
+  <!-- JS -->
+  <script src="/blackv/app.js" defer></script>
+
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" class="js-abs" data-href="IMG/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" class="js-abs" data-href="IMG/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" class="js-abs" data-href="IMG/favicon-16x16.png" />
-  <link rel="manifest" class="js-abs" data-href="IMG/site.webmanifest" />
-  <link rel="icon" class="js-abs" data-href="IMG/favicon.ico" />
-
-  <!-- Absolutiza links, scripts y OG -->
-  <script>
-  (function () {
-    try {
-      var meta = document.querySelector('meta[name="site-base"]');
-      var root = meta && meta.content ? meta.content.trim() : "/";
-
-      if (!root.startsWith("/")) root = "/" + root;
-      if (!root.endsWith("/")) root += "/";
-
-      var baseAbs = new URL(
-        root,
-        location.origin && location.origin !== "null" ? location.origin : location.href
-      ).toString();
-
-      function abs(p) {
-        p = String(p || "").replace(/^\/+/, "");
-        return new URL(p, baseAbs).toString();
-      }
-
-      document.querySelectorAll('link.js-abs[data-href]').forEach(function (el) {
-        el.href = abs(el.getAttribute('data-href'));
-      });
-
-      document.querySelectorAll('script.js-abs[data-src]').forEach(function (el) {
-        el.src = abs(el.getAttribute('data-src'));
-      });
-
-      document.querySelectorAll('meta.js-abs-meta[data-path]').forEach(function (el) {
-        el.setAttribute('content', abs(el.getAttribute('data-path')));
-      });
-    } catch (e) {}
-  })();
-  </script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/blackv/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blackv/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blackv/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/blackv/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/blackv/android-chrome-512x512.png">
+  <link rel="manifest" href="/blackv/site.webmanifest">
 </head>
