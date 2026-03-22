@@ -1,20 +1,20 @@
 <!-- =========================================================
- Black Velvet — GLOBAL HEAD (Pagespeed + GH Pages)
- - Repo base: /blackv/
- - Tema temprano sin FOUC
+ Black Velvet — GLOBAL HEAD (flexible + GH Pages + Pagespeed)
+ - Base genérica para cualquier página
+ - No depende de páginas enlistadas
+ - Usa metas por defecto si la página no define otras
  - Absolutiza assets con URL() segura
- - CSS único: main.css
- - JS diferido: app.js
 ========================================================= -->
 <head>
   <meta charset="utf-8" />
   <meta name="site-base" content="/blackv/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Black Velvet | Lencería y juguetes</title>
+  <!-- SEO base por defecto -->
+  <title>Black Velvet</title>
   <meta
     name="description"
-    content="Black Velvet: tienda online de lencería, juguetes y accesorios con envío discreto en CDMX, Edomex y envíos nacionales."
+    content="Black Velvet: tienda online con lencería, juguetes y accesorios, envío discreto y atención por WhatsApp."
   />
   <meta name="robots" content="index,follow" />
   <meta name="color-scheme" content="dark light" />
@@ -38,19 +38,19 @@
   <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph base -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Black Velvet" />
   <meta property="og:locale" content="es_MX" />
-  <meta property="og:title" content="Black Velvet | Lencería y juguetes" />
+  <meta property="og:title" content="Black Velvet" />
   <meta
     property="og:description"
-    content="Compra lencería, juguetes y accesorios con diseño premium, envío discreto y atención por WhatsApp."
+    content="Lencería, juguetes y accesorios con envío discreto y atención por WhatsApp."
   />
   <meta property="og:image" class="js-abs-meta" data-path="IMG/og-blackvelvet.webp" content="" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts: una sola familia, con preconnect correcto -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -91,16 +91,16 @@
         return new URL(p, baseAbs).toString();
       }
 
-      document.querySelectorAll("link.js-abs[data-href]").forEach(function (el) {
-        el.href = abs(el.getAttribute("data-href"));
+      document.querySelectorAll('link.js-abs[data-href]').forEach(function (el) {
+        el.href = abs(el.getAttribute('data-href'));
       });
 
-      document.querySelectorAll("script.js-abs[data-src]").forEach(function (el) {
-        el.src = abs(el.getAttribute("data-src"));
+      document.querySelectorAll('script.js-abs[data-src]').forEach(function (el) {
+        el.src = abs(el.getAttribute('data-src'));
       });
 
-      document.querySelectorAll("meta.js-abs-meta[data-path]").forEach(function (el) {
-        el.setAttribute("content", abs(el.getAttribute("data-path")));
+      document.querySelectorAll('meta.js-abs-meta[data-path]').forEach(function (el) {
+        el.setAttribute('content', abs(el.getAttribute('data-path')));
       });
     } catch (e) {}
   })();
